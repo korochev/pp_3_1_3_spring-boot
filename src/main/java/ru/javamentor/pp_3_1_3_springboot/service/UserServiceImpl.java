@@ -9,6 +9,7 @@ import ru.javamentor.pp_3_1_3_springboot.models.User;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService{
     private final UserDAO userDAO;
 
@@ -18,11 +19,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> index() {
         return userDAO.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User show(long id) {
         return userDAO.findById(id).get();
     }
